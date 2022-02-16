@@ -1,7 +1,6 @@
 package com.estudos.criptografia.domain;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity
 @Table(name = "customer")
@@ -13,6 +12,17 @@ public class CustomerDomain {
 
     @Column
     private String document;
+
+    @Column
+    private String nome;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public Integer getId() {
         return id;
