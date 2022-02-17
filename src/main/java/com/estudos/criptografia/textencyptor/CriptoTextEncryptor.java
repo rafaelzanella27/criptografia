@@ -13,6 +13,7 @@ public class CriptoTextEncryptor {
         final static String password = "testeCripto123";
         final static String salt = KeyGenerators.string().generateKey();
 
+
         public static String encrypt(String textToEncrypt){
             if (textToEncrypt != null && !textToEncrypt.isEmpty())
             {
