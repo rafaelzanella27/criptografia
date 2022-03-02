@@ -1,5 +1,7 @@
 package com.estudos.criptografia.domain;
 
+import com.estudos.criptografia.util.AttributeEncryptor;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,7 @@ public class CustomerDomain {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Convert(converter = AttributeEncryptor.class)
     @Column
     private String document;
 

@@ -31,15 +31,22 @@ public class CustomerController {
         this.repository = repository;
         this.encoder = encoder;
     }
-    //Salva criptografando com Bcrypt
+
+    //Salva criptografando com anotação
     @PostMapping("/salvar")
     public ResponseEntity<CustomerDomain> salvarNovoCustomer(@RequestBody CustomerDomain customer){
-        CustomerDomain customerDomain = new CustomerDomain();
-        customerDomain.setId(customer.getId());
-        customerDomain.setDocument(encoder.encode(customer.getDocument()));
-        customerDomain.setNome(encoder.encode(customer.getNome()));
-        return ResponseEntity.ok(repository.save(customerDomain));
+        return ResponseEntity.ok(repository.save(customer));
     }
+
+    //Salva criptografando com Bcrypt
+//    @PostMapping("/salvar")
+//    public ResponseEntity<CustomerDomain> salvarNovoCustomer(@RequestBody CustomerDomain customer){
+//        CustomerDomain customerDomain = new CustomerDomain();
+//        customerDomain.setId(customer.getId());
+//        customerDomain.setDocument(encoder.encode(customer.getDocument()));
+//        customerDomain.setNome(encoder.encode(customer.getNome()));
+//        return ResponseEntity.ok(repository.save(customerDomain));
+//    }
 
     //Salva criptografando com TextEncryptor
     @PostMapping("/save")
@@ -108,6 +115,13 @@ public class CustomerController {
 
         }
         return ResponseEntity.ok(customerDomainDescriptografado);
+    }
+
+    @GetMapping("/consultarId/{id}")
+    public ResponseEntity consultaId(@PathVariable("id") Integer id){
+
+        Optional<CustomerDomain> customer = repository.findByIdCustomer(id);
+        return ResponseEntity.ok(customer.get());
     }
 
 }
